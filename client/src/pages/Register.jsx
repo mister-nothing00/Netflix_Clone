@@ -71,7 +71,10 @@ export default function Register() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               rounded={"2xl"}
-              mb={{ base: 3, md: 0 }} 
+              mb={{ base: 3, md: 0 }}
+              border={"1.5px solid "}
+              boxShadow={"lg"}
+ 
             />
             <Input
               type="password"
@@ -81,6 +84,10 @@ export default function Register() {
               onChange={(e) => setPassword(e.target.value)}
               rounded={"2xl"}
               mb={{ base: 3, md: 0 }} 
+              border={"1.5px solid "}
+              boxShadow={"lg"}
+
+             
             />
             <Button
               type="submit"
