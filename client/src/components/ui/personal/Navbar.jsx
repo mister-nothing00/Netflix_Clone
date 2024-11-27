@@ -78,36 +78,40 @@ function Navbar({ isScrolled }) {
             )}
           </Flex>
           <Flex justifyContent={"flex-end"} alignItems={"center"} width={"50%"}>
-            <Button
-              bgColor={"transparent"}
-              color={"white"}
-              size={"xs"}
-              onClick={() => setShowSearch((prev) => !prev)}
-            >
-              <FaSearch />
-            </Button>
-            {showSearch && (
-              <Input
-                type="text"
-                placeholder="Search"
-                size="xs"
-                ml={2}
-                width={"250px"}
-                border={"none"}
-                variant={"flushed"}
-                color={"black"}
-                borderColor={"gray.400"}
-              />
+            {!isMobile && (
+              <>
+                <Button
+                  bgColor={"transparent"}
+                  color={"white"}
+                  size={"xs"}
+                  onClick={() => setShowSearch((prev) => !prev)}
+                >
+                  <FaSearch />
+                </Button>
+                {showSearch && (
+                  <Input
+                    type="text"
+                    placeholder="Search"
+                    size="xs"
+                    ml={2}
+                    width={"250px"}
+                    border={"none"}
+                    variant={"flushed"}
+                    color={"black"}
+                    borderColor={"gray.400"}
+                  />
+                )}
+                <Button
+                  bgColor={"transparent"}
+                  color={"red"}
+                  size="xs"
+                  rounded={"full"}
+                  onClick={() => signOut(firebaseAuth)}
+                >
+                  <FaPowerOff />
+                </Button>
+              </>
             )}
-            <Button
-              bgColor={"transparent"}
-              color={"red"}
-              size="xs"
-              rounded={"full"}
-              onClick={() => signOut(firebaseAuth)}
-            >
-              <FaPowerOff />
-            </Button>
             {isMobile && (
               <Button
                 onClick={() => setIsToggled((prev) => !prev)}
@@ -150,7 +154,11 @@ function Navbar({ isScrolled }) {
                       fontSize={"sm"}
                       mb={4}
                       onClick={() => setIsToggled(false)}
-                      _hover={{color:"black", fontWeight:"semibold", textDecoration:"none" }}
+                      _hover={{
+                        color: "black",
+                        fontWeight: "semibold",
+                        textDecoration: "none",
+                      }}
                     >
                       {name}
                     </Link>
@@ -166,7 +174,7 @@ function Navbar({ isScrolled }) {
                 borderColor={"gray.400"}
                 variant={"flushed"}
                 mb={4}
-               color={"gray"}
+                color={"gray"}
               />
               <Button
                 size={"xs"}
@@ -177,9 +185,16 @@ function Navbar({ isScrolled }) {
                   signOut(firebaseAuth);
                   setIsToggled(false);
                 }}
-                _hover={{background:"red", color:"black", border:"none", boxShadow:"2xl", transform:"scale(0.9)", transition:"all 0.3s ease", }}
+                _hover={{
+                  background: "red",
+                  color: "black",
+                  border: "none",
+                  boxShadow: "2xl",
+                  transform: "scale(0.9)",
+                  transition: "all 0.3s ease",
+                }}
               >
-                <FaPowerOff /> 
+                <FaPowerOff />
               </Button>
             </VStack>
           </Box>
