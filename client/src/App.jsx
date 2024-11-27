@@ -5,6 +5,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Netflix from "./pages/Netflix";
+import Player from "./components/ui/personal/Player";
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Netflix />,
+  },
+  {
+    path: "/player",
+    element: <Player />,
   },
 ]);
 

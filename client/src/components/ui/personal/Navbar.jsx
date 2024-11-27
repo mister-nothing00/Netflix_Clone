@@ -3,6 +3,7 @@ import {
   Box,
   Button,
   Flex,
+  HStack,
   Image,
   Input,
   Link,
@@ -53,7 +54,7 @@ function Navbar({ isScrolled }) {
       left="0"
       width="100%"
       zIndex="10"
-      bg="rgba(0, 0, 0, 0.5)"
+      bg="rgba(0, 0, 0, 0.8)"
       px={4}
       m={0}
     >
@@ -98,6 +99,7 @@ function Navbar({ isScrolled }) {
                 bg="transparent"
                 color="whiteAlpha.800"
                 onClick={() => setShowSearch((prev) => !prev)}
+                size={"sm"}
               >
                 <FaSearch />
               </Button>
@@ -116,6 +118,7 @@ function Navbar({ isScrolled }) {
                 bg="transparent"
                 color="red"
                 onClick={() => signOut(firebaseAuth)}
+                size={"sm"}
               >
                 <FaPowerOff />
               </Button>
@@ -137,16 +140,18 @@ function Navbar({ isScrolled }) {
         <Box
           position="absolute"
           top="100%"
-          left="0"
-          width="100%"
+          left="auto"
+          right="auto"
+          width="90%"
           bg="white"
           boxShadow="lg"
           p={4}
           zIndex="20"
         >
-          <VStack spacing={4} align="stretch">
+          <HStack  direction={"column"} spacing={4} alignItems="center" >
             {links.map(({ name, link }, index) => (
               <Link
+              
                 key={index}
                 as={RouterLink}
                 to={link}
@@ -194,7 +199,7 @@ function Navbar({ isScrolled }) {
             >
               <FaPowerOff />
             </Button>
-          </VStack>
+          </HStack>
         </Box>
       )}
     </Box>

@@ -4,8 +4,10 @@ import bgImage from "../../../assets/home.jpg";
 import MovieLogo from "../../../assets/homeTitle.webp";
 import { FaPlay } from "react-icons/fa";
 import { AiOutlineInfoCircle } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
 
 export default function Hero() {
+  const navigate = useNavigate();
   return (
     <Box position={"relative"} width="100%" height="100vh">
       <Image
@@ -48,6 +50,7 @@ export default function Hero() {
             size="md"
             variant="solid"
             width={"100px"}
+            onClick={() => navigate("/player")}
           >
             <FaPlay /> Play
           </Button>
