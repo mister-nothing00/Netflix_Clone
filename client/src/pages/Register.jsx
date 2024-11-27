@@ -2,15 +2,32 @@ import React, { useState } from "react";
 import { Box, Button, Flex, Heading, Input, Text } from "@chakra-ui/react";
 import BackgroundImage from "../components/ui/personal/BackgroundImage";
 import Header from "../components/ui/personal/Header";
+import { firebaseAuth } from "../utils/firebase-config";
+import { createUserWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
+import useShowToast from "../hook/context/useShowToast";
+import { useNavigate } from "react-router-dom";
 
 export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const showToast = useShowToast();
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(email, password);
+    try {
+      await createUserWithEmailAndPassword(firebaseAuth, email, password);
+      showToast("Success 🚀", "User registered successfully", "success");
+    } catch (error) {
+      showToast("Error", "Password should be at least 6 characters", "error");
+      console.log(error);
+    }
   };
+
+  onAuthStateChanged(firebaseAuth, (currentUser)=>{
+    if(currentUser) navigate("/")
+  })
 
   return (
     <Box
@@ -20,7 +37,7 @@ export default function Register() {
       position={"relative"}
     >
       <BackgroundImage />
-      <Header />
+      <Header login />
       <Flex
         flexDirection={"column"}
         justifyContent={"center"}
@@ -33,7 +50,7 @@ export default function Register() {
         transform={"translate(-50%, -50%)"}
         color={"white"}
         textAlign={"center"}
-        px={4} 
+        px={4}
       >
         <Heading
           fontFamily={"Inter"}
@@ -74,7 +91,6 @@ export default function Register() {
               mb={{ base: 3, md: 0 }}
               border={"1.5px solid "}
               boxShadow={"lg"}
- 
             />
             <Input
               type="password"
@@ -83,18 +99,20 @@ export default function Register() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               rounded={"2xl"}
-              mb={{ base: 3, md: 0 }} 
+              mb={{ base: 3, md: 0 }}
               border={"1.5px solid "}
               boxShadow={"lg"}
-
-             
             />
             <Button
               type="submit"
               fontFamily={"Inter"}
               size={"md"}
               rounded={"3xl"}
-              width={{ base: "100%", md: "auto" }} 
+              width={{ base: "100%", md: "auto" }}
+              bgColor={"red"}
+              transform={"scale(0.8)"}
+              transition={"all 0.3s ease"}
+              _hover={{ transform: "scale(0.9)", transition: "all 0.3s ease" }}
             >
               Get started
             </Button>

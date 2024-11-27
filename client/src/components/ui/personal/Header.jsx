@@ -22,6 +22,7 @@ export default function Header(props) {
         colorScheme="red"
         rounded={"2xl"}
         size={"sm"}
+        bgColor={"red"}
       >
         {props.login ? "Log in" : "Sign in"}
       </Button>
