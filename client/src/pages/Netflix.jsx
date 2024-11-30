@@ -1,12 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import Navbar from "../components/ui/personal/Navbar";
 import { Box } from "@chakra-ui/react";
 import Hero from "../components/ui/personal/Hero";
-import Player from "../components/ui/personal/Player";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { getGenres } from "../store";
 
 export default function Home() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const navigate=useNavigate();
+  const dispatch=useDispatch();
+
+  useEffect(()=>{
+    dispatch(getGenres())
+  }, [])
+
 
   window.onscroll = () => {
     setIsScrolled(window.pageXOffset === 0 ? false : true);

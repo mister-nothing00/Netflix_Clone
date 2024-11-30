@@ -4,13 +4,11 @@ import BackgroundImage from "../components/ui/personal/BackgroundImage";
 import Header from "../components/ui/personal/Header";
 import { firebaseAuth } from "../utils/firebase-config";
 import { createUserWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
-import useShowToast from "../hook/context/useShowToast";
 import { useNavigate } from "react-router-dom";
 
 export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const showToast = useShowToast();
   const navigate = useNavigate();
 
 
@@ -18,9 +16,7 @@ export default function Register() {
     e.preventDefault();
     try {
       await createUserWithEmailAndPassword(firebaseAuth, email, password);
-      showToast("Success 🚀", "User registered successfully", "success");
     } catch (error) {
-      showToast("Error", "Password should be at least 6 characters", "error");
       console.log(error);
     }
   };

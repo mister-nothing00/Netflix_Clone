@@ -4,22 +4,18 @@ import BackgroundImage from "../components/ui/personal/BackgroundImage";
 import Header from "../components/ui/personal/Header";
 import { firebaseAuth } from "../utils/firebase-config";
 import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
-import useShowToast from "../hook/context/useShowToast";
 import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const showToast = useShowToast();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       await signInWithEmailAndPassword(firebaseAuth, email, password);
-      showToast("Success 🚀", "User registered successfully", "success");
     } catch (error) {
-      showToast("Error", "Password should be at least 6 characters", "error");
       console.log(error);
     }
   };
