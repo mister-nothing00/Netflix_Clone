@@ -9,8 +9,56 @@ import { useNavigate } from "react-router-dom";
 export default function Hero() {
   const navigate = useNavigate();
   return (
-    <Box position={"relative"} width="100%" height="100vh">
+    <Box width={"auto"} height={"auto"}>
       <Image
+        src={bgImage}
+        alt="Background"
+        objectFit="cover"
+        width="100%"
+        height="100%"
+        filter="brightness(70%)"
+      />
+
+      <Box position="absolute" bottom="5rem" width="100%" px="5rem">
+        {/* Movie Logo */}
+        <Box mb="5rem">
+          <Image src={MovieLogo} alt="Movie Logo" />
+        </Box>
+        {/* Buttons */}
+        <Flex gap="2rem">
+          <Button
+            onClick={() => navigate("/player")}
+            bg="white"
+            color="black"
+            fontSize="lg"
+            size={"sm"}
+            rounded={"lg"}
+            display="flex"
+            alignItems="center"
+            _hover={{ opacity: 0.8 }}
+          >
+            <FaPlay /> Play
+          </Button>
+          <Button
+            bg="rgba(109, 109, 110, 0.7)"
+            color="white"
+            fontSize="lg"
+            size={"sm"}
+            rounded={"lg"}
+            display="flex"
+            alignItems="center"
+            _hover={{ opacity: 0.7 }}
+          >
+            <AiOutlineInfoCircle /> More Info
+          </Button>
+        </Flex>
+      </Box>
+    </Box>
+  );
+}
+
+{
+  /* <Image
         src={bgImage}
         alt="Background"
         objectFit="cover"
@@ -20,25 +68,24 @@ export default function Hero() {
         top="0"
         left="0"
         zIndex="0"
+      
       />
 
-      {/* Sovrapposizione sfumata sopra l'immagine */}
+      
       <Box
         position="absolute"
         top="0"
         left="0"
         width="100%"
         height="100%"
+        bgGradient="linear(to-b, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3))"
         zIndex="1"
       />
-
-      {/* Contenuto principale del componente Hero */}
       <Box
         position="absolute"
         bottom="5%"
         left="5%"
-        textAlign="left"
-        zIndex="2"
+        zIndex="2" 
         color="white"
       >
         <Image src={MovieLogo} alt="Movie Logo" mb={4} maxWidth="50%" />
@@ -50,24 +97,27 @@ export default function Hero() {
             size="md"
             variant="solid"
             width={"100px"}
+            color="white"
+            _hover={{ bgColor: "gray.800" }}
             onClick={() => navigate("/player")}
+            leftIcon={<FaPlay />}
           >
-            <FaPlay /> Play
+            Play
           </Button>
           <Button
             fontWeight={"bold"}
             fontSize={"sm"}
             bgColor={"red.600"}
-            color={"black"}
-            border={"transparent"}
+            color={"white"}
+            border={"none"}
             size="md"
             variant="outline"
             width={"100px"}
+            _hover={{ bgColor: "red.700" }}
+            leftIcon={<AiOutlineInfoCircle />}
           >
-            <AiOutlineInfoCircle /> Info
+            Info
           </Button>
         </Flex>
-      </Box>
-    </Box>
-  );
+      </Box> */
 }

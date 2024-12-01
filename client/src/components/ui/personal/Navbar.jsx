@@ -49,12 +49,16 @@ function Navbar({ isScrolled }) {
 
   return (
     <Box
-      position="fixed"
+      position="absolute"
       top="0"
       left="0"
       width="100%"
       zIndex="10"
-      bg="rgba(0, 0, 0, 0.8)"
+      bg="rgba(0, 0, 0, 0)"
+      _hover={{
+        background: "rgba(0, 0, 0, 0.9)",
+        transition: "background 0.4s ease-in-out",
+      }}
       px={4}
       m={0}
     >
@@ -148,10 +152,9 @@ function Navbar({ isScrolled }) {
           p={4}
           zIndex="20"
         >
-          <HStack  direction={"column"} spacing={4} alignItems="center" >
+          <HStack direction={"column"} spacing={4} alignItems="center">
             {links.map(({ name, link }, index) => (
               <Link
-              
                 key={index}
                 as={RouterLink}
                 to={link}

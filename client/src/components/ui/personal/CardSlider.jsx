@@ -1,5 +1,7 @@
 import React from "react";
 import Card from "./Card";
+import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
+
 
 export default function CardSlider({ data, title }) {
   return (
