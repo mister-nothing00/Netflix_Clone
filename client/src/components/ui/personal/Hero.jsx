@@ -9,13 +9,13 @@ import { useNavigate } from "react-router-dom";
 export default function Hero() {
   const navigate = useNavigate();
   return (
-    <Box width={"auto"} height={"auto"}>
+    <Box width={"auto"} >
       <Image
         src={bgImage}
         alt="Background"
         objectFit="cover"
         width="100%"
-        height="100%"
+        height="100vh"
         filter="brightness(70%)"
       />
 

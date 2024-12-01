@@ -47,7 +47,6 @@ export default function Card({ movieData, isLiked = false }) {
           bg="blackAlpha.900"
           borderRadius="md"
           boxShadow="md"
-          p="4"
           w="320px"
         >
           {/* Hover Container */}
@@ -79,7 +78,7 @@ export default function Card({ movieData, isLiked = false }) {
           </Box>
 
           {/* Info Container */}
-          <Flex direction="column" mt="4" gap="2">
+          <Flex direction="column" mt="4" px={2} pb={2} gap="2">
             <Heading
               fontSize="lg"
               color="white"
@@ -88,7 +87,12 @@ export default function Card({ movieData, isLiked = false }) {
             >
               {movieData.name}
             </Heading>
-            <Flex justify="space-between" align="center" color="gray.400" mt="2">
+            <Flex
+              justify="space-between"
+              align="center"
+              color="gray.400"
+              mt="2"
+            >
               {/* Icons */}
               <Flex gap="4">
                 <IoPlayCircleSharp
@@ -97,21 +101,44 @@ export default function Card({ movieData, isLiked = false }) {
                   cursor={"pointer"}
                   size={"18px"}
                 />
-                <RiThumbUpFill title="Like" size={"18px"}  cursor={"pointer"}/>
-                <RiThumbDownFill title="Dislike"size={"18px"}  cursor={"pointer"} />
+                <RiThumbUpFill title="Like" size={"18px"} cursor={"pointer"} />
+                <RiThumbDownFill
+                  title="Dislike"
+                  size={"18px"}
+                  cursor={"pointer"}
+                />
 
                 {isLiked ? (
-                  <BsCheck title="Remove from List" size={"18px"}  cursor={"pointer"} />
+                  <BsCheck
+                    title="Remove from List"
+                    size={"18px"}
+                    cursor={"pointer"}
+                  />
                 ) : (
-                  <AiOutlinePlus title="Add to List" size={"18px"}  cursor={"pointer"}/>
+                  <AiOutlinePlus
+                    title="Add to List"
+                    size={"18px"}
+                    cursor={"pointer"}
+                  />
                 )}
               </Flex>
               {/* More Info */}
-              <BiChevronDown title="More Info" size={"18px"}  cursor={"pointer"}/>
+              <BiChevronDown
+                title="More Info"
+                size={"18px"}
+                cursor={"pointer"}
+              />
             </Flex>
 
             {/* Genres */}
-            <Box display={"flex"} gap={2} fontFamily={"Roboto"}  fontSize={"sm"} color="whiteAlpha.900" mt={2}>
+            <Box
+              display={"flex"}
+              gap={2}
+              fontFamily={"Roboto"}
+              fontSize={"sm"}
+              color="whiteAlpha.900"
+              mt={2}
+            >
               <ul>
                 {movieData.genres.map((genre) => (
                   <li key={genre}>{genre}</li>
