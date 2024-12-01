@@ -5,7 +5,8 @@ import {
   Image,
   List,
   ListItem,
-  Text,
+  IconButton,
+  Button,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import video from "../../../assets/video.mp4";
@@ -19,64 +20,107 @@ import { BiChevronDown } from "react-icons/bi";
 export default function Card({ movieData, isLiked = false }) {
   const [isHovered, setIsHovered] = useState(false);
   const navigate = useNavigate();
-  return (
-    <>
-      <Box
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-      >
-        <Image
-          src={`https://image.tmdb.org/t/p/w500${movieData.image}`}
-          alt="movie"
-        />
 
-        {isHovered && (
-          <Box>
-            <Flex>
-              <Image
-                src={`https://image.tmdb.org/t/p/w500${movieData.image}`}
-                alt="movie"
-                onClick={() => navigate("/player")}
-              />
-              <video
-                src={video}
-                autoPlay
-                loop
-                muted
-                onClick={() => navigate("/player")}
-              ></video>
-            </Flex>
-            <Flex direction={"column"}>
-              <Heading fontFamily={"Inter"} onClick={() => navigate("/player")}>
-                {movieData.name}
-              </Heading>
-              <Box display={"flex"} justifyContent={"space-between"}>
-                <IoPlayCircleSharp
-                  title="play"
-                  onClick={() => navigate("/player")}
-                />
-                <RiThumbUpFill title="Like" />
-                <RiThumbDownFill title="Dislike" />
-                {isLiked ? (
-                  <BsCheck title="Remove from List" />
-                ) : (
-                  <AiOutlinePlus title="Add to List" />
-                )}
-                <Box>
-                  <BiChevronDown title="More info" />
-                </Box>
-                <Box display={"flex"}>
-                  <ul>
-                  {movieData.genres.map((genre) => {
-                        return <li key={genre.id}>{genre.name}</li>;
-                      })}
-                  </ul>
-                </Box>
-              </Box>
-            </Flex>
+  return (
+    <Box
+      maxW="230px"
+      position="relative"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      {/* Main Image */}
+      <Image
+        src={`https://image.tmdb.org/t/p/w500${movieData.image}`}
+        alt="movie"
+        borderRadius="md"
+        objectFit="cover"
+        cursor="pointer"
+        onClick={() => navigate("/player")}
+      />
+
+      {isHovered && (
+        <Box
+          position="absolute"
+          top="-18vh"
+          left="0"
+          zIndex="10"
+          bg="blackAlpha.900"
+          borderRadius="md"
+          boxShadow="md"
+          p="4"
+          w="320px"
+        >
+          {/* Hover Container */}
+          <Box position="relative">
+            <Image
+              src={`https://image.tmdb.org/t/p/w500${movieData.image}`}
+              alt="movie"
+              borderRadius="md"
+              objectFit="cover"
+              onClick={() => navigate("/player")}
+              cursor="pointer"
+            />
+            <Box
+              as="video"
+              src={video}
+              autoPlay
+              loop
+              muted
+              position="absolute"
+              top="0"
+              left="0"
+              w="100%"
+              h="100%"
+              borderRadius="md"
+              objectFit="cover"
+              cursor="pointer"
+              onClick={() => navigate("/player")}
+            />
           </Box>
-        )}
-      </Box>
-    </>
+
+          {/* Info Container */}
+          <Flex direction="column" mt="4" gap="2">
+            <Heading
+              fontSize="lg"
+              color="white"
+              onClick={() => navigate("/player")}
+              cursor="pointer"
+            >
+              {movieData.name}
+            </Heading>
+            <Flex justify="space-between" align="center" color="gray.400" mt="2">
+              {/* Icons */}
+              <Flex gap="4">
+                <IoPlayCircleSharp
+                  title="Play"
+                  onClick={() => navigate("/player")}
+                  cursor={"pointer"}
+                  size={"18px"}
+                />
+                <RiThumbUpFill title="Like" size={"18px"}  cursor={"pointer"}/>
+                <RiThumbDownFill title="Dislike"size={"18px"}  cursor={"pointer"} />
+
+                {isLiked ? (
+                  <BsCheck title="Remove from List" size={"18px"}  cursor={"pointer"} />
+                ) : (
+                  <AiOutlinePlus title="Add to List" size={"18px"}  cursor={"pointer"}/>
+                )}
+              </Flex>
+              {/* More Info */}
+              <BiChevronDown title="More Info" size={"18px"}  cursor={"pointer"}/>
+            </Flex>
+
+            {/* Genres */}
+            <Box display={"flex"} gap={2} fontFamily={"Roboto"}  fontSize={"sm"} color="whiteAlpha.900" mt={2}>
+              <ul>
+                {movieData.genres.map((genre) => (
+                  <li key={genre}>{genre}</li>
+                ))}
+              </ul>
+            </Box>
+          </Flex>
+        </Box>
+      )}
+    </Box>
   );
 }
