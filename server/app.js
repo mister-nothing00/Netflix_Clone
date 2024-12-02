@@ -1,15 +1,25 @@
 import express from "express";
+import {connectDB} from "./database/db.js"
+import cors from "cors";
 import dotenv from "dotenv";
-import { connectDB } from "./database/db";
 
 dotenv.config();
 
 //APP
 
-const app= express();
-const PORT = process.env.PORT ;
+const app = express();
+const PORT = process.env.PORT;
 
-app.listen(`${PORT}`, ()=>{
-    console.log(`Server is running on localhost:${PORT}`)
-    connectDB();
-})
+//EXPRESS AND CORS 
+
+app.use(express.urlencoded({ extended: true })); 
+app.use(express.json());
+app.use(cors());
+
+//APP ROUTES
+
+
+app.listen(PORT, () => { 
+  console.log(`Server is running on localhost:${PORT}`);
+  connectDB();
+});

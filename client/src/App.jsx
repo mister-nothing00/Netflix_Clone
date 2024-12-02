@@ -7,6 +7,7 @@ import Register from "./pages/Register";
 import Netflix from "./pages/Netflix";
 import Player from "./components/ui/personal/Player";
 import Movies from "./pages/Movies";
+import TvShows from  "./pages/TvShows";
 
 const router = createBrowserRouter([
   {
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
     path: "/movies",
     element:<Movies/>
   },
+  {
+    path:"/tv",
+    element: <TvShows/>
+  }
 ]);
 
 export default function App() {

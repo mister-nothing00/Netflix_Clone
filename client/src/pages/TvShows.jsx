@@ -10,7 +10,7 @@ import Slider from "../components/ui/personal/Slider";
 import NotAvaible from "../components/ui/personal/NotAvaible";
 import SelectGenre from "../components/ui/personal/SelectGenre";
 
-export default function Movies() {
+export default function TvShows() {
   const [isScrolled, setIsScrolled] = useState(false);
   const movies = useSelector((state) => state.netflix.movies);
   const genres = useSelector((state) => state.netflix.genres);
@@ -29,7 +29,7 @@ export default function Movies() {
 
   useEffect(() => {
     if (genresLoaded) {
-      dispatch(fetchMovies({ genres, type: "movie" }));
+      dispatch(fetchMovies({ genres, type: "tv" }));
     }
   }, [genresLoaded]);
 
@@ -54,7 +54,7 @@ export default function Movies() {
     <Box bg={"black"} height={"100vh"} width={"100%"} color={"white"}>
       <Navbar isScrolled={isScrolled} />
       <Box display={"block"} width={"100%"} mx={"auto"} pt={20}>
-        <SelectGenre genres={genres} type={"movie"} />
+        <SelectGenre genres={genres} type={"tv"} />
         {movies.length ? <Slider movies={movies} /> : <NotAvaible />}
       </Box>
     </Box>
