@@ -6,6 +6,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Netflix from "./pages/Netflix";
 import Player from "./components/ui/personal/Player";
+import Movies from "./pages/Movies";
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
   {
     path: "/player",
     element: <Player />,
+  },
+  {
+    path: "/movies",
+    element:<Movies/>
   },
 ]);
 
