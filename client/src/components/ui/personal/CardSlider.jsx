@@ -1,16 +1,16 @@
 import React, { useRef, useState } from "react";
 import Card from "./Card";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
-import { Box, Heading, Flex, Button } from "@chakra-ui/react";
+import { Box, Heading, Flex, Button, useBreakpointValue } from "@chakra-ui/react";
 
 export default function CardSlider({ data, title }) {
   const listRef = useRef();
   const [sliderPosition, setSliderPosition] = useState(0);
   const [showControls, setShowControls] = useState(false);
 
-  const CARD_WIDTH = 230; // Larghezza di una card più eventuale gap
-  const VISIBLE_CARDS = 5; // Numero di card visibili contemporaneamente
-  const MAX_POSITION = Math.max(0, data.length - VISIBLE_CARDS); // Posizione massima consentita
+  const CARD_WIDTH = 400;
+  const VISIBLE_CARDS = useBreakpointValue({ base: 1, md: 3, lg: 5 });
+  const MAX_POSITION = Math.max(0, data.length - (VISIBLE_CARDS || 5));
 
   const handleDirection = (direction) => {
     let newSliderPosition = sliderPosition;
@@ -23,7 +23,6 @@ export default function CardSlider({ data, title }) {
       newSliderPosition += 1;
     }
 
-    // Aggiorna lo stato e la trasformazione
     setSliderPosition(newSliderPosition);
     listRef.current.style.transform = `translateX(${-CARD_WIDTH * newSliderPosition}px)`;
   };
@@ -31,16 +30,18 @@ export default function CardSlider({ data, title }) {
   return (
     <Box
       position="relative"
-      padding="24px 0"
+      py={16}
       onMouseEnter={() => setShowControls(true)}
       onMouseLeave={() => setShowControls(false)}
+      zIndex={0}
+      width="100%"
     >
       {/* Titolo */}
       <Heading color="whiteAlpha.950" ml="50px" mb="16px">
         {title}
       </Heading>
 
-      <Box position="relative" overflow="hidden">
+      <Box position="relative">
         {/* Freccia Sinistra */}
         {showControls && sliderPosition > 0 && (
           <Button
@@ -48,7 +49,7 @@ export default function CardSlider({ data, title }) {
             left="10px"
             top="50%"
             transform="translateY(-50%)"
-            zIndex="99"
+            zIndex="200"
             variant="ghost"
             color="white"
             fontSize="2rem"
@@ -68,7 +69,7 @@ export default function CardSlider({ data, title }) {
             transform: `translateX(${-CARD_WIDTH * sliderPosition}px)`,
           }}
           ml="50px"
-          gap="1rem"
+          gap="16px"
         >
           {data.map((movie, index) => (
             <Card movieData={movie} index={index} key={movie.id} />
@@ -82,7 +83,7 @@ export default function CardSlider({ data, title }) {
             right="10px"
             top="50%"
             transform="translateY(-50%)"
-            zIndex="99"
+            zIndex="200"
             variant="ghost"
             color="white"
             fontSize="2rem"

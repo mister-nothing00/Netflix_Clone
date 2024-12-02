@@ -38,7 +38,7 @@ export default function Netflix() {
 
   return (
     <>
-      <Box bgColor={"blackAlpha.950"} width={"100%"}>
+      <Box bgColor={"blackAlpha.950"} width={"100%"} height={"100%"}>
         <Navbar isScrolled={isScrolled} />
         <Box position={"relative"} width="100%" height="100vh">
           <Hero />
