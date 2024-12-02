@@ -1,6 +1,6 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
-export const connectDB = async () => {
+const connectDB = async () => {
   try {
     await mongoose.connect(process.env.MONGO_URL, {
       dbName: "Netflix_Clone",
@@ -12,3 +12,5 @@ export const connectDB = async () => {
     console.log(error);
   }
 };
+
+module.exports = connectDB; // Assicurati che sia questa la linea di esportazione
