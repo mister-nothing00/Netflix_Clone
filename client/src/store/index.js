@@ -90,7 +90,7 @@ export const removeMovieFromLiked = createAsyncThunk(
   async ({ movieId, email }) => {
     const {
       data: { movies },
-    } = await axios.delete("/api/user/delete", {
+    } = await axios.put("/api/user/delete", {
       email,
       movieId,
     });

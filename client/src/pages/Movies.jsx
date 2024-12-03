@@ -11,7 +11,6 @@ import NotAvaible from "../components/ui/personal/NotAvaible";
 import SelectGenre from "../components/ui/personal/SelectGenre";
 
 export default function Movies() {
-  const [isScrolled, setIsScrolled] = useState(false);
   const movies = useSelector((state) => state.netflix.movies);
   const genres = useSelector((state) => state.netflix.genres);
   const genresLoaded = useSelector((state) => state.netflix.genresLoaded);
@@ -40,22 +39,14 @@ export default function Movies() {
     else navigate("/login");
   });
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.pageYOffset === 0 ? false : true);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+  
 
   return (
     <Box bg={"black"} height={"100vh"} width={"100%"} color={"white"}>
-      <Navbar isScrolled={isScrolled} />
+      <Navbar />
       <Box display={"block"} width={"100%"} mx={"auto"} pt={20}>
         <SelectGenre genres={genres} type={"movie"} />
-        {movies.length ? <Slider movies={movies} /> : <NotAvaible />}
+        {Array.isArray(movies) && movies.length > 0 ? <Slider movies={movies} /> : <NotAvaible />}
       </Box>
     </Box>
   );

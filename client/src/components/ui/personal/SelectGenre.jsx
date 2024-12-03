@@ -1,7 +1,7 @@
 import React from "react";
 import { Box } from "@chakra-ui/react";
 import { useDispatch } from "react-redux";
-import { fetchDataByGenre } from "../../../store";
+import { fetchDataByGenre } from "../../../store/index.js";
 
 export default function SelectGenre({ genres, type }) {
   const dispatch = useDispatch();

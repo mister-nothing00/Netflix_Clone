@@ -20,7 +20,7 @@ import { useDispatch } from "react-redux";
 import video from "../../../assets/video.mp4";
 import { onAuthStateChanged } from "firebase/auth";
 import { firebaseAuth } from "../../../utils/firebase-config";
-import { addMovieToLiked, removeMovieFromLiked } from "../../../store";
+import { addMovieToLiked, removeMovieFromLiked } from "../../../store/index.js";
 
 export default React.memo(function Card({ index, movieData, isLiked = false }) {
   const navigate = useNavigate();

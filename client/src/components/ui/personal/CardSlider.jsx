@@ -72,7 +72,7 @@ export default function CardSlider({ data, title }) {
           gap="16px"
         >
           {data.map((movie, index) => (
-            <Card movieData={movie} index={index} key={movie.id} isLiked/>
+            <Card movieData={movie} index={index} key={movie.id} />
           ))}
         </Flex>
 

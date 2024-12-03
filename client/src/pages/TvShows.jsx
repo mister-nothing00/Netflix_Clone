@@ -11,7 +11,6 @@ import NotAvaible from "../components/ui/personal/NotAvaible";
 import SelectGenre from "../components/ui/personal/SelectGenre";
 
 export default function TvShows() {
-  const [isScrolled, setIsScrolled] = useState(false);
   const movies = useSelector((state) => state.netflix.movies);
   const genres = useSelector((state) => state.netflix.genres);
   const genresLoaded = useSelector((state) => state.netflix.genresLoaded);
@@ -19,20 +18,21 @@ export default function TvShows() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-
   
   useEffect(() => {
-    dispatch(getGenres());
+    if (!genres.length) dispatch(getGenres());
   }, []);
-
-
-
+  
   useEffect(() => {
     if (genresLoaded) {
       dispatch(fetchMovies({ genres, type: "tv" }));
     }
   }, [genresLoaded]);
 
+{/*useEffect(() => {
+    dispatch(getGenres());
+  }, [])* */}
+  
   const [user, setUser] = useState(undefined);
 
   onAuthStateChanged(firebaseAuth, (currentUser) => {
@@ -40,22 +40,14 @@ export default function TvShows() {
     else navigate("/login");
   });
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.pageYOffset === 0 ? false : true);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+  
 
   return (
     <Box bg={"black"} height={"100vh"} width={"100%"} color={"white"}>
-      <Navbar isScrolled={isScrolled} />
+      <Navbar />
       <Box display={"block"} width={"100%"} mx={"auto"} pt={20}>
         <SelectGenre genres={genres} type={"tv"} />
-        {movies.length ? <Slider movies={movies} /> : <NotAvaible />}
+        {Array.isArray(movies) && movies.length > 0 ? <Slider movies={movies} /> : <NotAvaible />}
       </Box>
     </Box>
   );

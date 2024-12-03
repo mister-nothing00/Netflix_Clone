@@ -34,10 +34,6 @@ export default function Netflix() {
     if (!currentUser) navigate("/login");
   });
 
-  window.onscroll = () => {
-    setIsScrolled(window.pageYOffset === 0 ? false : true);
-    return () => (window.onscroll = null);
-  };
 
   return (
     <>
