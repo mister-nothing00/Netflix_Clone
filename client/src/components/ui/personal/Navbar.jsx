@@ -22,10 +22,11 @@ function Navbar() {
     { name: "Movies", link: "/movies" },
     { name: "My List", link: "/mylist" },
   ];
-  
+
   const [showSearch, setShowSearch] = useState(false);
   const [isToggled, setIsToggled] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
 
   onAuthStateChanged(firebaseAuth, (currentUser) => {
@@ -47,12 +48,12 @@ function Navbar() {
 
   return (
     <Box
-      position="absolute"
+      position="fixed"
       top="0"
       left="0"
       width="100%"
       zIndex="10"
-      bg="black"
+      bg="rgba(0, 0, 0, 0)"
       _hover={{
         background: "rgba(0, 0, 0, 0.9)",
         transition: "background 0.4s ease-in-out",
@@ -109,10 +110,11 @@ function Navbar() {
                 <Input
                   type="text"
                   placeholder="Search"
+                  htmlSize={"16px"}
                   size="sm"
                   ml={2}
-                  width="250px"
-                  color="black"
+                  width="80%"
+                  color="gray.300"
                   variant={"flushed"}
                 />
               )}
@@ -140,24 +142,26 @@ function Navbar() {
       </Flex>
       {isMobile && isToggled && (
         <Box
-          position="absolute"
-          top="100%"
-          left="auto"
-          right="auto"
-          width="90%"
+          position="relative"
+          width="100%"
           bg="white"
-          boxShadow="lg"
-          p={4}
-          zIndex="20"
+          py={2}
+          px={4}
+          zIndex="1"
+          rounded={"md"}
+          
         >
-          <HStack direction={"column"} spacing={4} alignItems="center">
+          <Flex direction={"column"} gap={1} justifyContent={"space-around"} alignItems="flex-start" >
             {links.map(({ name, link }, index) => (
               <Link
                 key={index}
                 as={RouterLink}
                 to={link}
-                color="gray.500"
+                color="gray.400"
                 fontSize="sm"
+                borderLeft={"2px solid"}
+                borderColor={"red"}
+                pl={1}
                 mb={4}
                 onClick={() => setIsToggled(false)}
                 _hover={{
@@ -178,7 +182,7 @@ function Navbar() {
               borderColor="gray.400"
               variant="flushed"
               mb={4}
-              color="gray"
+              color="black"
             />
             <Button
               size="xs"
@@ -200,7 +204,7 @@ function Navbar() {
             >
               <FaPowerOff />
             </Button>
-          </HStack>
+          </Flex>
         </Box>
       )}
     </Box>
