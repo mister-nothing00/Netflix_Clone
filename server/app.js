@@ -3,6 +3,7 @@ const connectDB = require("./database/db.js");
 const cors = require("cors");
 const userRoutes = require("./routes/UserRoutes");
 const dotenv = require("dotenv");
+const path= require("path")
 
 dotenv.config();
 
@@ -19,6 +20,16 @@ app.use(cors());
 //APP ROUTES
 
 app.use("/api/user", userRoutes);
+
+
+
+const __dirname = path.resolve();
+
+app.use(express.static(path.join(__dirname, "/client/dist")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
+});
 
 app.listen(PORT, () => {
   console.log(`Server is running on localhost:${PORT}`);
