@@ -7,7 +7,6 @@ import {
   Image,
   Input,
   Link,
-  VStack,
 } from "@chakra-ui/react";
 import logo from "../../../assets/netflix.png";
 import { Link as RouterLink } from "react-router-dom";
@@ -16,18 +15,17 @@ import { onAuthStateChanged, signOut } from "firebase/auth";
 import { firebaseAuth } from "../../../utils/firebase-config";
 import { useNavigate } from "react-router-dom";
 
-function Navbar({ isScrolled }) {
+function Navbar() {
   const links = [
     { name: "Home", link: "/" },
     { name: "Tv", link: "/tv" },
     { name: "Movies", link: "/movies" },
-    { name: "Prefered", link: "/mylist" },
+    { name: "My List", link: "/mylist" },
   ];
-
+  
   const [showSearch, setShowSearch] = useState(false);
   const [isToggled, setIsToggled] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
 
   onAuthStateChanged(firebaseAuth, (currentUser) => {
@@ -54,7 +52,7 @@ function Navbar({ isScrolled }) {
       left="0"
       width="100%"
       zIndex="10"
-      bg="rgba(0, 0, 0, 0)"
+      bg="black"
       _hover={{
         background: "rgba(0, 0, 0, 0.9)",
         transition: "background 0.4s ease-in-out",

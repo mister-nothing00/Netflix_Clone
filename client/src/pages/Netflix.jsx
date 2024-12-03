@@ -9,13 +9,16 @@ import { fetchMovies, getGenres } from "../store";
 import Slider from "../components/ui/personal/Slider";
 import { onAuthStateChanged } from "firebase/auth";
 import { firebaseAuth } from "../utils/firebase-config";
+import { FaPlay } from "react-icons/fa";
+import { AiOutlineInfoCircle } from "react-icons/ai";
 
 export default function Netflix() {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const navigate = useNavigate();
   const genresLoaded = useSelector((state) => state.netflix.genresLoaded);
   const movies = useSelector((state) => state.netflix.movies);
+  const genres = useSelector((state) => state.netflix.genres);
+
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(getGenres());
@@ -23,7 +26,7 @@ export default function Netflix() {
 
   useEffect(() => {
     if (genresLoaded) {
-      dispatch(fetchMovies({ type: "all" }));
+      dispatch(fetchMovies({genres, type: "all" }));
     }
   }, [genresLoaded]);
 
@@ -39,7 +42,7 @@ export default function Netflix() {
   return (
     <>
       <Box bgColor={"blackAlpha.950"} width={"100%"} height={"100%"}>
-        <Navbar isScrolled={isScrolled} />
+        <Navbar  />
         <Box position={"relative"} width="100%" height="100vh">
           <Hero />
         </Box>

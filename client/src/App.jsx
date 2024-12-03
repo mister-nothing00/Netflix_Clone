@@ -1,13 +1,14 @@
 import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-// Importa i componenti per le route
+
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Netflix from "./pages/Netflix";
 import Player from "./components/ui/personal/Player";
 import Movies from "./pages/Movies";
 import TvShows from  "./pages/TvShows";
+import UserListedMovies from "./pages/UserListedMovies";
 
 const router = createBrowserRouter([
   {
@@ -17,10 +18,6 @@ const router = createBrowserRouter([
   {
     path: "/register",
     element: <Register />,
-  },
-  {
-    path: "/",
-    element: <Netflix />,
   },
   {
     path: "/player",
@@ -33,7 +30,16 @@ const router = createBrowserRouter([
   {
     path:"/tv",
     element: <TvShows/>
-  }
+  },
+  {
+    path:"/mylist",
+    element: <UserListedMovies/>
+  },
+  {
+    path: "/",
+    element: <Netflix />,
+  },
+  
 ]);
 
 export default function App() {

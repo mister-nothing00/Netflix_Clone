@@ -4,13 +4,13 @@ import { Box, Text } from "@chakra-ui/react";
 
 export default function Slider({ movies }) {
   const getMoviesFromRange = (from, to) => {
-    return movies?.slice(from, to) || [];
+    return movies.slice(from, to);
   };
 
   return (
     <>
       {movies?.length > 0 ? (
-        <Box w="full" p={0} bg="black" color="white">
+        <Box w="100%" p={0} m={0} bg="black" color="white">
           <CardSlider title="Trending Now" data={getMoviesFromRange(0, 10)} />
           <CardSlider title="New Releases" data={getMoviesFromRange(10, 20)} />
           <CardSlider

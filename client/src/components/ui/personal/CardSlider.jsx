@@ -8,9 +8,9 @@ export default function CardSlider({ data, title }) {
   const [sliderPosition, setSliderPosition] = useState(0);
   const [showControls, setShowControls] = useState(false);
 
-  const CARD_WIDTH = 400;
+  const CARD_WIDTH = 400; // Larghezza della card
   const VISIBLE_CARDS = useBreakpointValue({ base: 1, md: 3, lg: 5 });
-  const MAX_POSITION = Math.max(0, data.length - (VISIBLE_CARDS || 5));
+  const MAX_POSITION = Math.max(0, data.length - VISIBLE_CARDS);
 
   const handleDirection = (direction) => {
     let newSliderPosition = sliderPosition;
@@ -24,7 +24,7 @@ export default function CardSlider({ data, title }) {
     }
 
     setSliderPosition(newSliderPosition);
-    listRef.current.style.transform = `translateX(${-CARD_WIDTH * newSliderPosition}px)`;
+    listRef.current.style.transform = `translateX(${CARD_WIDTH * newSliderPosition}px)`;
   };
 
   return (
@@ -72,7 +72,7 @@ export default function CardSlider({ data, title }) {
           gap="16px"
         >
           {data.map((movie, index) => (
-            <Card movieData={movie} index={index} key={movie.id} />
+            <Card movieData={movie} index={index} key={movie.id} isLiked/>
           ))}
         </Flex>
 

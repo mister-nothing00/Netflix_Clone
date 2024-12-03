@@ -20,6 +20,7 @@ import { useDispatch } from "react-redux";
 import video from "../../../assets/video.mp4";
 import { onAuthStateChanged } from "firebase/auth";
 import { firebaseAuth } from "../../../utils/firebase-config";
+import { addMovieToLiked, removeMovieFromLiked } from "../../../store";
 
 export default React.memo(function Card({ index, movieData, isLiked = false }) {
   const navigate = useNavigate();
@@ -27,7 +28,7 @@ export default React.memo(function Card({ index, movieData, isLiked = false }) {
   const [isHovered, setIsHovered] = useState(false);
   const [email, setEmail] = useState(undefined);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const cardRef = useRef(null);
+  const cardRef = useRef();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(firebaseAuth, (currentUser) => {
@@ -39,6 +40,14 @@ export default React.memo(function Card({ index, movieData, isLiked = false }) {
     });
     return () => unsubscribe();
   }, [navigate]);
+
+  const addToList = async () => {
+    try {
+      await dispatch(addMovieToLiked({ email, movieData }));
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const handleNavigate = () => navigate("/player");
 
@@ -53,10 +62,9 @@ export default React.memo(function Card({ index, movieData, isLiked = false }) {
   return (
     <Box
       ref={cardRef}
-      maxW="230px"
-      w="230px"
-      h="100%"
-      position="relative"
+      width="100%"
+      h="20vh"
+      position={"relative"}
       cursor="pointer"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
@@ -68,25 +76,23 @@ export default React.memo(function Card({ index, movieData, isLiked = false }) {
         borderRadius="0.2rem"
         w="100%"
         h="100%"
-        zIndex="0"
         onClick={handleNavigate}
       />
 
       {isHovered && (
         <Box
           position="absolute"
-          top="-18vh"
-          left="0"
-          w="20rem"
-          borderRadius="0.3rem"
+          top="-15vh"
+          left="-20px"
+          w="auto"
+          rounded={"lg"}
           bg="gray.900"
-          boxShadow="rgba(0, 0, 0, 0.75) 0px 3px 10px"
-          zIndex="99"
-         
-          transition="0.3s ease-in-out"
+          boxShadow="rgba(255, 255, 255, 0.3) 0px  2px 1px"
+          zIndex="2"
+          
+             
         >
-          <Box position="relative" h="140px" mb="1rem">
-            {/* Video che appare al passaggio del mouse */}
+          <Box position="relative" mb="1rem">
             <video
               src={video}
               autoPlay
@@ -106,7 +112,7 @@ export default React.memo(function Card({ index, movieData, isLiked = false }) {
           <Flex direction="column" gap={2} p={2}>
             <Heading
               size="lg"
-              color="whiteAlpha.800"
+              color="whiteAlpha.900"
               _hover={{ cursor: "pointer" }}
               onClick={handleNavigate}
             >
@@ -114,21 +120,59 @@ export default React.memo(function Card({ index, movieData, isLiked = false }) {
             </Heading>
 
             <Flex justify="space-between" align="center">
-              <Flex gap="1rem" >
-                <Button size={"2xs"} variant="solid" color="gray.400" _hover={{color:"white", transform:"scale(1.1)"}} onClick={handleNavigate}>
-                  <IoPlayCircleSharp />
+              <Flex gap="1rem">
+                <Button
+                  size={"2xs"}
+                  variant="solid"
+                  color="gray.400"
+                  _hover={{ color: "white", transform: "scale(1.1)" }}
+                  onClick={handleNavigate}
+                >
+                  <IoPlayCircleSharp title="play" />
                 </Button>
-                <Button size={"2xs"} variant="solid" color="gray.400" _hover={{color:"white", transform:"scale(1.1)"}}>
-                  <RiThumbUpFill />
+                <Button
+                  size={"2xs"}
+                  variant="solid"
+                  color="gray.400"
+                  _hover={{ color: "white", transform: "scale(1.1)" }}
+                >
+                  <RiThumbUpFill title="Like" />
                 </Button>
-                <Button size={"2xs"} variant="solid" color="gray.400" _hover={{color:"white", transform:"scale(1.1)"}}>
-                  <RiThumbDownFill />
+                <Button
+                  size={"2xs"}
+                  variant="solid"
+                  color="gray.400"
+                  _hover={{ color: "white", transform: "scale(1.1)" }}
+                >
+                  <RiThumbDownFill title="Dislike" />
                 </Button>
-                <Button size={"2xs"} variant="solid" color="gray.400" _hover={{color:"white", transform:"scale(1.1)"}}>
-                  {isLiked ? <BsCheck /> : <AiOutlinePlus />}
+                <Button
+                  size={"2xs"}
+                  variant="solid"
+                  color="gray.400"
+                  _hover={{ color: "white", transform: "scale(1.1)" }}
+                >
+                  {isLiked ? (
+                    <BsCheck
+                      title="Remove from list"
+                      onClick={() =>
+                        dispatch(
+                          removeMovieFromLiked({ movieId: movieData.id, email })
+                        )
+                      }
+                    />
+                  ) : (
+                    <AiOutlinePlus title="Add to my list" onClick={addToList} />
+                  )}
                 </Button>
               </Flex>
-              <Button size={"2xs"} bg={"transparent"}  color="gray" _hover={{color:"white", transform:"scale(1.1)"}} onClick={onOpen}>
+              <Button
+                size={"2xs"}
+                bg={"transparent"}
+                color="gray"
+                _hover={{ color: "white", transform: "scale(1.1)" }}
+                onClick={onOpen}
+              >
                 <BiChevronDown />
               </Button>
             </Flex>
@@ -137,7 +181,9 @@ export default React.memo(function Card({ index, movieData, isLiked = false }) {
               <ul style={{ display: "flex", gap: "1rem", padding: 0 }}>
                 {movieData.genres.map((genre, index) => (
                   <li key={index} style={{ listStyleType: "none" }}>
-                    <Text fontFamily={"Inter"} fontSize={"sm"} color="gray.400">{genre}</Text>
+                    <Text fontFamily={"Inter"} fontSize={"sm"} color="gray.400">
+                      {genre}
+                    </Text>
                   </li>
                 ))}
               </ul>

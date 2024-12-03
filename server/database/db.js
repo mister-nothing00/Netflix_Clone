@@ -13,4 +13,4 @@ const connectDB = async () => {
   }
 };
 
-module.exports = connectDB; // Assicurati che sia questa la linea di esportazione
+module.exports = connectDB;
