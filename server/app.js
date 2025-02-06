@@ -19,8 +19,8 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: ["localhost:5000", "https://netflix-clone-gjcq.onrender.com"],
-    methods: ["GET", "POST", "PUT"],
+    origin: ["http://localhost:5173","https://netflix-clone-gjcq.onrender.com"],
+    methods: [ "POST", "GET", "PUT"],
   })
 );
 
