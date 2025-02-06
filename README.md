@@ -3,14 +3,14 @@ Project Overview
 This project is a Netflix clone developed with the help of ChatGPT and Blackbox AI. It utilizes The Movie Database (TMDb) API for fetching movie data and features a full user authentication system built with Firebase Authentication. The application is designed to be fully responsive, ensuring a seamless user experience on both desktop and mobile devices. It also includes a movie slider for browsing through different titles.
 
 # Key Features
-[Authentication: Users can register and log in using Firebase Authentication. Passwords must be at least 6 characters long for security.
+Authentication: Users can register and log in using Firebase Authentication. Passwords must be at least 6 characters long for security.
 Movie Data: Integration with The Movie Database (TMDb) API for fetching and displaying movies.
 Responsive Design: The app is built to be fully responsive, adapting to various screen sizes.
 Movie Slider: Users can scroll through movies with an interactive slider.
 Backend: Node.js with Express and MongoDB for managing user data and their favorite movies.
 State Management: Redux is used on the client-side for state management.
-Testing and Debugging: Thunder Client was used for API testing and debugging.]
-Technologies Used
+Testing and Debugging: Thunder Client was used for API testing and debugging.
+Technologies Used:
 Frontend:
 React.js
 Axios for making HTTP requests
