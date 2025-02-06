@@ -3,7 +3,8 @@ const connectDB = require("./database/db.js");
 const cors = require("cors");
 const userRoutes = require("./routes/UserRoutes");
 const dotenv = require("dotenv");
-const path= require("path")
+const path = require("path");
+const cookieParser = require("cookie-parser");
 
 dotenv.config();
 
@@ -15,23 +16,25 @@ const PORT = process.env.PORT;
 //EXPRESS AND CORS
 
 app.use(express.json());
-app.use(cors());
+app.use(cookieParser());
+app.use(
+  cors({
+    origin: ["localhost:5000", "https://netflix-clone-gjcq.onrender.com"],
+    methods: ["GET", "POST", "PUT"],
+  })
+);
 
 //APP ROUTES
 
 app.use("/api/user", userRoutes);
 
-
-
-
-
 app.use(express.static(path.join(__dirname, "../client/dist")));
 
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/dist', "index.html"));
+  res.sendFile(path.join(__dirname, "../client/dist", "index.html"));
 });
 
 app.listen(PORT, () => {
-  console.log(`Server is running on localhost:${PORT}`);
+  console.log(`Server is running `);
   connectDB();
 });

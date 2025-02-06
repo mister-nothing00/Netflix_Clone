@@ -18,13 +18,9 @@ export default function Movies() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-
-  
   useEffect(() => {
     dispatch(getGenres());
   }, []);
-
-
 
   useEffect(() => {
     if (genresLoaded) {
@@ -35,18 +31,24 @@ export default function Movies() {
   const [user, setUser] = useState(undefined);
 
   onAuthStateChanged(firebaseAuth, (currentUser) => {
-    if (currentUser) setUser(currentUser.uid);
-    else navigate("/login");
-  });
-
   
+    if (currentUser) {
+      setUser(currentUser.uid);
+    } else {
+      navigate("/login");
+    }
+  });
 
   return (
     <Box bg={"black"} height={"100vh"} width={"100%"} color={"white"}>
       <Navbar />
       <Box display={"block"} width={"100%"} mx={"auto"} pt={20}>
         <SelectGenre genres={genres} type={"movie"} />
-        {Array.isArray(movies) && movies.length > 0 ? <Slider movies={movies} /> : <NotAvaible />}
+        {Array.isArray(movies) && movies?.length > 0 ? (
+          <Slider movies={movies} />
+        ) : (
+          <NotAvaible />
+        )}
       </Box>
     </Box>
   );

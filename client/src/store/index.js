@@ -30,8 +30,10 @@ const createArrayFromRawData = (array, moviesArray, genres) => {
     if (movie.backdrop_path)
       moviesArray.push({
         id: movie.id,
-        name: movie?.original_name ? movie.original_name : movie.original_title,
-        image: movie.backdrop_path,
+        name: movie?.original_name
+          ? movie?.original_name
+          : movie?.original_title,
+        image: movie?.backdrop_path,
         genres: movieGenres.slice(0, 3),
       });
   });
@@ -90,10 +92,11 @@ export const removeMovieFromLiked = createAsyncThunk(
   async ({ movieId, email }) => {
     const {
       data: { movies },
-    } = await axios.put("/api/user/delete", {
+    } = await axios.put("/api/user/update", {
       email,
       movieId,
     });
+    alert("Removed !");
     return movies;
   }
 );
@@ -105,7 +108,7 @@ export const addMovieToLiked = createAsyncThunk(
       email,
       data: movieData,
     });
-    return movieData; 
+    return movieData;
   }
 );
 
@@ -130,7 +133,7 @@ const NetflixSlice = createSlice({
       state.movies = action.payload;
     });
     builder.addCase(addMovieToLiked.fulfilled, (state, action) => {
-      state.movies.push(action.payload); 
+      state.movies.push(action.payload);
     });
   },
 });

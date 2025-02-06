@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 export default function Hero() {
   const navigate = useNavigate();
   return (
-    <Box width={"auto"} >
+    <Box>
       <Image
         src={bgImage}
         alt="Background"
@@ -55,69 +55,4 @@ export default function Hero() {
       </Box>
     </Box>
   );
-}
-
-{
-  /* <Image
-        src={bgImage}
-        alt="Background"
-        objectFit="cover"
-        width="100%"
-        height="100%"
-        position="absolute"
-        top="0"
-        left="0"
-        zIndex="0"
-      
-      />
-
-      
-      <Box
-        position="absolute"
-        top="0"
-        left="0"
-        width="100%"
-        height="100%"
-        bgGradient="linear(to-b, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3))"
-        zIndex="1"
-      />
-      <Box
-        position="absolute"
-        bottom="5%"
-        left="5%"
-        zIndex="2" 
-        color="white"
-      >
-        <Image src={MovieLogo} alt="Movie Logo" mb={4} maxWidth="50%" />
-
-        <Flex justifyContent="flex-start" gap={4} flexDirection="row">
-          <Button
-            fontFamily={"Inter"}
-            bgColor={"black"}
-            size="md"
-            variant="solid"
-            width={"100px"}
-            color="white"
-            _hover={{ bgColor: "gray.800" }}
-            onClick={() => navigate("/player")}
-            leftIcon={<FaPlay />}
-          >
-            Play
-          </Button>
-          <Button
-            fontWeight={"bold"}
-            fontSize={"sm"}
-            bgColor={"red.600"}
-            color={"white"}
-            border={"none"}
-            size="md"
-            variant="outline"
-            width={"100px"}
-            _hover={{ bgColor: "red.700" }}
-            leftIcon={<AiOutlineInfoCircle />}
-          >
-            Info
-          </Button>
-        </Flex>
-      </Box> */
 }

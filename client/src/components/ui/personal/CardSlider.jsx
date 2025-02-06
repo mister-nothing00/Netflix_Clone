@@ -1,14 +1,20 @@
 import React, { useRef, useState } from "react";
 import Card from "./Card";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
-import { Box, Heading, Flex, Button, useBreakpointValue } from "@chakra-ui/react";
+import {
+  Box,
+  Heading,
+  Flex,
+  Button,
+  useBreakpointValue,
+} from "@chakra-ui/react";
 
 export default function CardSlider({ data, title }) {
-  const listRef = useRef();
   const [sliderPosition, setSliderPosition] = useState(0);
   const [showControls, setShowControls] = useState(false);
+  const listRef = useRef();
 
-  const CARD_WIDTH = 400; // Larghezza della card
+  const CARD_WIDTH = 400;
   const VISIBLE_CARDS = useBreakpointValue({ base: 1, md: 3, lg: 5 });
   const MAX_POSITION = Math.max(0, data.length - VISIBLE_CARDS);
 
@@ -24,17 +30,18 @@ export default function CardSlider({ data, title }) {
     }
 
     setSliderPosition(newSliderPosition);
-    listRef.current.style.transform = `translateX(${CARD_WIDTH * newSliderPosition}px)`;
+    listRef.current.style.transform = `translateX(${
+      CARD_WIDTH * newSliderPosition
+    }px)`;
   };
 
   return (
     <Box
-      position="relative"
-      py={16}
       onMouseEnter={() => setShowControls(true)}
       onMouseLeave={() => setShowControls(false)}
       zIndex={0}
       width="100%"
+      py={16}
     >
       {/* Titolo */}
       <Heading color="whiteAlpha.950" ml="50px" mb="16px">
@@ -51,8 +58,8 @@ export default function CardSlider({ data, title }) {
             transform="translateY(-50%)"
             zIndex="200"
             variant="ghost"
-            color="white"
-            fontSize="2rem"
+            color="red"
+            fontSize="24px"
             onClick={() => handleDirection("left")}
             _hover={{ bg: "rgba(255, 255, 255, 0.2)" }}
             aria-label="Scroll Left"
@@ -72,7 +79,7 @@ export default function CardSlider({ data, title }) {
           gap="16px"
         >
           {data.map((movie, index) => (
-            <Card movieData={movie} index={index} key={movie.id} />
+            <Card movieData={movie}  key={index} />
           ))}
         </Flex>
 

@@ -22,12 +22,12 @@ import { onAuthStateChanged } from "firebase/auth";
 import { firebaseAuth } from "../../../utils/firebase-config";
 import { addMovieToLiked, removeMovieFromLiked } from "../../../store/index.js";
 
-export default React.memo(function Card({ index, movieData, isLiked = false }) {
+export default React.memo(function Card({  movieData, isLiked = false }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [isHovered, setIsHovered] = useState(false);
   const [email, setEmail] = useState(undefined);
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const {  onOpen } = useDisclosure();
   const cardRef = useRef();
 
   useEffect(() => {
@@ -44,6 +44,7 @@ export default React.memo(function Card({ index, movieData, isLiked = false }) {
   const addToList = async () => {
     try {
       await dispatch(addMovieToLiked({ email, movieData }));
+      alert("Added to your list")
     } catch (error) {
       console.log(error);
     }
@@ -51,7 +52,6 @@ export default React.memo(function Card({ index, movieData, isLiked = false }) {
 
   const handleNavigate = () => navigate("/player");
 
-  // Gestione dell'hover in modo che non chiuda la card se si clicca sugli elementi
   const handleMouseEnter = () => setIsHovered(true);
   const handleMouseLeave = (e) => {
     if (!cardRef.current || !cardRef.current.contains(e.relatedTarget)) {
@@ -74,9 +74,10 @@ export default React.memo(function Card({ index, movieData, isLiked = false }) {
         src={`https://image.tmdb.org/t/p/w500${movieData.image}`}
         alt="card"
         borderRadius="0.2rem"
-        w="100%"
-        h="100%"
+        w="150px"
+        h="150px"
         onClick={handleNavigate}
+        objectFit={"cover"}
       />
 
       {isHovered && (
@@ -84,7 +85,7 @@ export default React.memo(function Card({ index, movieData, isLiked = false }) {
           position="absolute"
           top="-15vh"
           left="-20px"
-          w="auto"
+          w="250px"
           rounded={"lg"}
           bg="gray.900"
           boxShadow="rgba(255, 255, 255, 0.3) 0px  2px 1px"
@@ -157,8 +158,9 @@ export default React.memo(function Card({ index, movieData, isLiked = false }) {
                       title="Remove from list"
                       onClick={() =>
                         dispatch(
-                          removeMovieFromLiked({ movieId: movieData.id, email })
+                          removeMovieFromLiked({ movieId: movieData?.id, email })
                         )
+                        
                       }
                     />
                   ) : (

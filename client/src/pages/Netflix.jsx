@@ -39,7 +39,7 @@ export default function Netflix() {
     <>
       <Box bgColor={"blackAlpha.950"} width={"100%"} height={"100%"}>
         <Navbar  />
-        <Box position={"relative"} width="100%" height="100vh">
+        <Box position={"relative"} width="100%">
           <Hero />
         </Box>
         <Slider movies={movies} />

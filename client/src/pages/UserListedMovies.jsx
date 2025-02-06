@@ -12,13 +12,16 @@ export default function UserListedMovies() {
   const movies = useSelector((state) => state.netflix.movies);
   const genres = useSelector((state) => state.netflix.genres);
   const genresLoaded = useSelector((state) => state.netflix.genresLoaded);
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState(" ");
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   onAuthStateChanged(firebaseAuth, (currentUser) => {
-    if (currentUser) setEmail(currentUser.email);
-    else navigate("/login");
+    if (currentUser) {
+      setEmail(currentUser?.email);
+    } else {
+      navigate("/login");
+    }
   });
 
   useEffect(() => {
@@ -31,7 +34,7 @@ export default function UserListedMovies() {
     if (genresLoaded) {
       dispatch(fetchMovies({ genres, type: "movie" }));
     }
-  }, []);
+  }, [genresLoaded]);
 
   return (
     <>
@@ -43,9 +46,19 @@ export default function UserListedMovies() {
         position={"relative"}
         zIndex={0}
       >
-        <Box display={"flex"} flexDirection={"column"} width={"90%"} mx={"auto"}>
+        <Box
+          display={"flex"}
+          flexDirection={"column"}
+          width={"90%"}
+          mx={"auto"}
+        >
           <Navbar />
-          <Heading color={"white"} position={"relative"} zIndex={3} mt={"100px"}>
+          <Heading
+            color={"white"}
+            position={"relative"}
+            zIndex={3}
+            mt={"100px"}
+          >
             My List
           </Heading>
           {Array.isArray(movies) && movies.length > 0 ? (

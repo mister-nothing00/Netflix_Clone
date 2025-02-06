@@ -29,9 +29,6 @@ export default function TvShows() {
     }
   }, [genresLoaded]);
 
-{/*useEffect(() => {
-    dispatch(getGenres());
-  }, [])* */}
   
   const [user, setUser] = useState(undefined);
 
