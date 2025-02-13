@@ -16,6 +16,9 @@ The project was developed using the **MERN stack** together with Firebase Authen
 ## 🎥 Features
 
 ✅ **Registration and Login**: Users can create an account or log in using Firebase Authentication.
+
 ✅ **Interactive Home Page**: A home page that displays a list of movies with a Netflix-inspired interface.
+
 ✅ **Favorite Movie Saving**: Ability to add and view favorite movies, thanks to a RESTful API.
+
 ✅ **Fluid User Experience**: The application has been optimized for high performance and rendering speed.
