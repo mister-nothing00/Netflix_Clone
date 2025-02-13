@@ -1,41 +1,21 @@
-## Netflix Clone Project
-Project Overview
-This project is a Netflix clone developed with the help of ChatGPT and Blackbox AI. It utilizes The Movie Database (TMDb) API for fetching movie data and features a full user authentication system built with Firebase Authentication. The application is designed to be fully responsive, ensuring a seamless user experience on both desktop and mobile devices. It also includes a movie slider for browsing through different titles.
+# 🎬 Netflix Clone
 
-# Key Features
-Authentication: Users can register and log in using Firebase Authentication. Passwords must be at least 6 characters long for security.
-Movie Data: Integration with The Movie Database (TMDb) API for fetching and displaying movies.
-Responsive Design: The app is built to be fully responsive, adapting to various screen sizes.
-Movie Slider: Users can scroll through movies with an interactive slider.
-Backend: Node.js with Express and MongoDB for managing user data and their favorite movies.
-State Management: Redux is used on the client-side for state management.
-Testing and Debugging: Thunder Client was used for API testing and debugging.
-Technologies Used:
-Frontend:
-React.js
-Axios for making HTTP requests
-Redux for state management
-Chakra UI for component styling
-Backend:
-Node.js with Express
-MongoDB for the database
-Authentication:
-Firebase Authentication
-API Testing:
-Thunder Client
-Project Structure
-Client Side:
-React components for user interface
-Redux for handling application state
-Axios for API requests and data fetching
-Backend:
-Node.js server with Express
-MongoDB for storing user data and favorite movies
+**Netflix Clone** is a project that replicates some of the main features of the Netflix streaming platform. Users can register, log in to the platform, explore the available movies and save their favorites. The main goal of the project was to create a performant application, with an attractive interface and a fluid user experience.
 
+## 🚀 Technologies used
 
-Client-side: Firebase configuration.
-Server-side: MongoDB connection URI.
-Usage
-Registration & Login: Users can create an account and log in. Ensure that passwords meet the minimum requirement of 6 characters.
-Browsing: Browse movies and use the slider to scroll through them.
-Favorites: Users can save movies to their list, which will be stored in MongoDB.
+The project was developed using the **MERN stack** together with Firebase Authentication and Chakra UI:
+
+- **MongoDB**: NoSQL database to store user data and saved movies.
+- **Express.js**: Framework for managing the backend and the RESTful API.
+- **React.js**: Library for building the dynamic and interactive frontend.
+- **Node.js**: Execution environment for the backend.
+- **Firebase Authentication**: Service to securely manage user registration and login.
+- **Chakra UI**: Library of UI components to create a modern and responsive interface.
+
+## 🎥 Features
+
+✅ **Registration and Login**: Users can create an account or log in using Firebase Authentication.
+✅ **Interactive Home Page**: A home page that displays a list of movies with a Netflix-inspired interface.
+✅ **Favorite Movie Saving**: Ability to add and view favorite movies, thanks to a RESTful API.
+✅ **Fluid User Experience**: The application has been optimized for high performance and rendering speed.
